@@ -150,22 +150,10 @@ def eval_postfix(postfix_tokens):
     return stack[0]
 
 
-   # return 0  # TODO
-
-
-# Method used in REPL
-# Look like the main function
-# def eval_expr(expr: str):
-#     if len(expr) == 0:
-#         return nan
-#     tokens = tokenize(expr)
-#     postfix_tokens = infix_to_postfix(tokens)
-#     return postfix_tokens  # eval_postfix(postfix_tokens)
-#
-#
-# e = eval_expr("1-1231+213/32^2(13+21)")
-# print(e)
-# print("here")
+e = eval_expr("1-1231+213/32^2(13+21)")
+print("here")
+print(e)
+print("here")
 
 
 
@@ -212,13 +200,14 @@ def to_num(number):
     return n
 
 
+# Method used in REPL
+# Look like the main function
 def eval_expr(expr: str):
     if len(expr) == 0:
         return nan
     tokens = remove_whitespace(expr)
     postfix_tokens = infix_to_postfix(tokens)
-    to_num(postfix_tokens)
-    return postfix_tokens  # eval_postfix(postfix_tokens)
+    return eval_postfix(postfix_tokens)
 
 
 # e = eval_expr("1-1231+213/32^2(13+21)")
