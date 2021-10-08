@@ -150,10 +150,7 @@ def eval_postfix(postfix_tokens):
     return stack[0]
 
 
-e = eval_expr("1-1231+213/32^2(13+21)")
-print("here")
-print(e)
-print("here")
+
 
 
 
@@ -195,23 +192,24 @@ def remove_whitespace(expr):
     return tokens
 
 
-def to_num(number):
-    n = float(number)
-    return n
-
-
 # Method used in REPL
 # Look like the main function
 def eval_expr(expr: str):
+    print("d")
     if len(expr) == 0:
         return nan
     tokens = remove_whitespace(expr)
     postfix_tokens = infix_to_postfix(tokens)
+    print(postfix_tokens)
+    print("fdsf")
     return eval_postfix(postfix_tokens)
-
-
-# e = eval_expr("1-1231+213/32^2(13+21)")
+#
+# e = eval_expr("1-121+23/32*(13+21)")
+# print("here")
 # print(e)
 # print("here")
+
+
+
 
 # TODO Possibly more methods

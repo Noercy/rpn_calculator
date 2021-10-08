@@ -2,7 +2,7 @@
 
 from tkinter import *
 
-from Calculator import *
+from Calculator_me import eval_expr
 
 
 # A graphical user interface for the Calculator
