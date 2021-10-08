@@ -120,9 +120,36 @@ test = infix_to_postfix(tokensss)
 print(test)
 
 
+def apply_operator(op: str, d1: float, d2: float):
+    op_switcher = {
+        "+": d1 + d2,
+        "-": d2 - d1,
+        "*": d1 * d2,
+        "/": nan if d1 == 0 else d2 / d1,
+        "^": d2 ** d1
+    }
+    return op_switcher.get(op, ValueError(OP_NOT_FOUND))
+
+
 # -----  Evaluate RPN expression -------------------
 def eval_postfix(postfix_tokens):
-    return 0  # TODO
+    op = "+-*/^"
+    stack = []
+    for i in postfix_tokens:
+        if i in op:
+            d1 = stack[-1]
+            d2 = stack[-2]
+            y = apply_operator(i, d1, d2)
+            stack.pop()
+            stack.pop()
+            stack.append(y)
+        else:
+            i = float(i)
+            stack.append(i)
+    return stack[0]
+
+
+   # return 0  # TODO
 
 
 # Method used in REPL
@@ -133,16 +160,6 @@ def eval_expr(expr: str):
     postfix_tokens = infix_to_postfix(tokens)
     return eval_postfix(postfix_tokens)
 
-
-def apply_operator(op: str, d1: float, d2: float):
-    op_switcher = {
-        "+": d1 + d2,
-        "-": d2 - d1,
-        "*": d1 * d2,
-        "/": nan if d1 == 0 else d2 / d1,
-        "^": d2 ** d1
-    }
-    return op_switcher.get(op, ValueError(OP_NOT_FOUND))
 
 
 def get_precedence(op: str):
