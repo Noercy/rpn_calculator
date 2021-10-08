@@ -2,6 +2,11 @@
 
 from math import nan
 from enum import Enum
+# TODO BUG FIXES:
+# Overflow
+# cannot multiply into () without *
+# felhantering
+
 
 # A calculator for rather simple arithmetic expressions.
 # Your task is to implement the missing functions so the
@@ -31,10 +36,10 @@ class Assoc(Enum):
     LEFT = 1
     RIGHT = 2
 
-
-tokens = "7+(8*(3^2)+4)"
-tokenss = "4+4*2/(1-5)"
-tokensss = "2+1*((91^2)+1-10)/7"
+#
+# tokens = "7+(8*(3^2)+4)"
+# tokenss = "4+4*2/(1-5)"
+# tokensss = "2+1*((91^2)+1-10)/7"
 
 
 def get_associativity(op: str):
@@ -116,9 +121,9 @@ def infix_to_postfix(tokens):  # take tokens from tokenize --> fix tokenize
     temp.clear()
     return postfix
 
-
-test = infix_to_postfix(tokensss)
-print(test)
+#
+# test = infix_to_postfix(tokensss)
+# print(test)
 
 def apply_operator(op: str, d1: float, d2: float):
     op_switcher = {
@@ -150,10 +155,6 @@ def eval_postfix(postfix_tokens):
     return stack[0]
 
 
-
-
-
-
 # dictonary to get the values of each operand
 def get_precedence(op: str):
     op_switcher = {
@@ -167,6 +168,7 @@ def get_precedence(op: str):
 
 
 # ---------- Tokenize -----------------------
+# Adds spaces inbetween the operands to split the string into a list
 def tokenize(expr: str):
     output = ""
     for char in expr:
@@ -177,12 +179,12 @@ def tokenize(expr: str):
             output += char
     return output.split(" ")  # TODO
 
+#
+# t = tokenize("10+1-1231.6+213/32^2(13+21)")
+# print(type(t))
+# print(t)
 
-t = tokenize("10+1-1231.6+213/32^2(13+21)")
-print(type(t))
-print(t)
-
-
+# removes extra whitespaces at the end if the function ends with a ")"
 def remove_whitespace(expr):
     tokens = tokenize(expr)
     print(type(tokens))
@@ -194,6 +196,9 @@ def remove_whitespace(expr):
 
 # Method used in REPL
 # Look like the main function
+# Input from GUI comes in here
+# turns the string into a list of strings for each element then orders it into postfix
+# returns the calculation of the postfix 
 def eval_expr(expr: str):
     print("d")
     if len(expr) == 0:
